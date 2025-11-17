@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>gyyanX – Intelligence That Transforms</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="gyyanX helps enterprises and tech startups design, build and scale AI solutions with GenAI, ML, RL-GNN optimization and enterprise-grade training."
+  />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --primary: #00c8ff;
+      --secondary: #7b2eff;
+      --accent: #4f9dff;
+
+      --surface-900: #0a0d14;
+      --surface-700: #121722;
+      --surface-500: #1c2333;
+      --divider: #2c3347;
+
+      --text-primary: #e8ecf7;
+      --text-secondary: #a8b3ca;
+      --text-tertiary: #76819b;
+
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 0 24px rgba(0, 200, 255, 0.25);
+      --shadow-strong: 0 0 40px rgba(0, 200, 255, 0.3);
+
+      --max-width: 1120px;
+      --nav-height: 80px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 0 0, #161b33 0, #05060a 45%, #000 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 13, 20, 0.96),
+        rgba(10, 13, 20, 0.85),
+        transparent
+      );
+      border-bottom: 1px solid rgba(79, 157, 255, 0.25);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, var(--primary), var(--secondary));
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .brand-svg {
+      width: 80%;
+      height: 80%;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-name {
+      font-family: "Exo 2", system-ui, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 1.05rem;
+    }
+
+    .brand-tagline {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-top: 2px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: width 0.22s ease-out;
+      border-radius: 999px;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      box-shadow: var(--shadow-soft);
+      white-space: nowrap;
+      color: #02040a;
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(79, 157, 255, 0.4);
+      background: rgba(12, 16, 30, 0.9);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .nav-toggle span,
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--text-primary);
+      position: relative;
+    }
+
+    .nav-toggle span::before {
+      position: absolute;
+      top: -5px;
+    }
+
+    .nav-toggle span::after {
+      position: absolute;
+      top: 5px;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--primary);
+      margin-bottom: 0.45rem;
+    }
+
+    .section-title {
+      font-family: "Exo 2", system-ui, sans-serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      max-width: 640px;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    /* HERO */
+    #home {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title {
+      font-family: "Exo 2", system-ui, sans-serif;
+      font-size: 2.9rem;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title span.gradient {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+      padding: 0.8rem 1.6rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #02040a;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .btn-secondary {
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(79, 157, 255, 0.7);
+      background: rgba(10, 13, 20, 0.7);
+      color: var(--text-primary);
+      font-size: 0.86rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .hero-meta span strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+
+    .hero-stack {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 22px;
+      padding: 1.4rem 1.2rem;
+      background: radial-gradient(circle at 0 0, rgba(0, 200, 255, 0.15), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(123, 46, 255, 0.18), transparent 55%),
+        rgba(10, 13, 24, 0.95);
+      border: 1px solid rgba(79, 157, 255, 0.5);
+      box-shadow: 0 0 34px rgba(0, 200, 255, 0.35);
+      backdrop-filter: blur(22px);
+    }
+
+    .hero-stack-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .stack-layer {
+      border-radius: 14px;
+      padding: 0.55rem 0.75rem;
+      margin-bottom: 0.45rem;
+      border: 1px solid rgba(79, 157, 255, 0.45);
+      background: rgba(9, 13, 25, 0.96);
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+    }
+
+    .stack-layer span {
+      font-size: 0.86rem;
+      font-weight: 500;
+    }
+
+    .stack-layer small {
+      font-size: 0.74rem;
+      color: var(--text-tertiary);
+    }
+
+    .layer-data {
+      background: linear-gradient(
+        90deg,
+        rgba(0, 200, 255, 0.22),
+        rgba(10, 13, 24, 0.96)
+      );
+    }
+
+    .layer-models {
+      background: linear-gradient(
+        90deg,
+        rgba(123, 46, 255, 0.24),
+        rgba(10, 13, 24, 0.96)
+      );
+    }
+
+    .layer-apps {
+      background: linear-gradient(
+        90deg,
+        rgba(79, 157, 255, 0.24),
+        rgba(10, 13, 24, 0.96)
+      );
+    }
+
+    .layer-mlops {
+      border-style: dashed;
+      opacity: 0.95;
+    }
+
+    .hero-stack-caption {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      text-align: center;
+      max-width: 360px;
+      line-height: 1.6;
+    }
+
+    .hero-stack-caption strong {
+      color: var(--text-secondary);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .grid-3-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(79, 157, 255, 0.28);
+      backdrop-filter: blur(18px);
+      padding: 1.5rem 1.4rem;
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.55);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      top: -40%;
+      right: -40%;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.45), transparent);
+      opacity: 0.5;
+    }
+
+    .card-kicker {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-title {
+      font-family: "Exo 2", system-ui, sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .chip-row {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .chip {
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(79, 157, 255, 0.55);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-tertiary);
+      background: rgba(10, 13, 20, 0.7);
+    }
+
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    .about-copy {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.8rem;
+      border: 1px solid rgba(79, 157, 255, 0.5);
+      background: rgba(12, 16, 30, 0.9);
+      color: var(--text-primary);
+    }
+
+    .about-panel {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(79, 157, 255, 0.3);
+      padding: 1.3rem 1.4rem;
+      backdrop-filter: blur(18px);
+    }
+
+    .about-panel h4 {
+      font-family: "Exo 2", system-ui, sans-serif;
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .about-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .metric {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .metric span {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .industry-card {
+      border-radius: var(--radius-md);
+      padding: 1rem 1rem;
+      background: rgba(16, 20, 35, 0.9);
+      border: 1px solid rgba(44, 51, 71, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .industry-card h4 {
+      font-size: 0.98rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .industry-card p {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .industry-tag {
+      position: absolute;
+      top: 0.7rem;
+      right: 0.8rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .training-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .training-levels {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .training-card {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(79, 157, 255, 0.3);
+      background: rgba(10, 13, 20, 0.9);
+      padding: 1rem 1rem;
+    }
+
+    .training-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .training-card p {
+      font-size: 0.83rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .training-stack {
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      color: var(--text-tertiary);
+    }
+
+    .resource-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.3rem;
+    }
+
+    .resource-item {
+      border-radius: var(--radius-md);
+      padding: 1rem 1rem;
+      background: rgba(12, 16, 30, 0.96);
+      border: 1px solid rgba(44, 51, 71, 0.9);
+    }
+
+    .resource-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .resource-item h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .resource-item p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 0.4rem;
+    }
+
+    .resource-link {
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    #contact {
+      padding-bottom: 3.5rem;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .contact-form {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(79, 157, 255, 0.3);
+      padding: 1.7rem 1.6rem;
+      backdrop-filter: blur(18px);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-bottom: 0.3rem;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid rgba(79, 157, 255, 0.45);
+      background: rgba(10, 13, 20, 0.85);
+      color: var(--text-primary);
+      padding: 0.65rem 0.85rem;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 110px;
+      border-radius: 16px;
+      resize: vertical;
+      padding-top: 0.7rem;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      box-shadow: 0 0 0 1px var(--primary), 0 0 12px rgba(0, 200, 255, 0.4);
+    }
+
+    .contact-meta {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .contact-meta strong {
+      color: var(--text-primary);
+    }
+
+    .contact-chips {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .contact-chip {
+      font-size: 0.78rem;
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(79, 157, 255, 0.4);
+      color: var(--text-tertiary);
+    }
+
+    footer {
+      border-top: 1px solid rgba(44, 51, 71, 0.9);
+      padding: 1.5rem 1.5rem 2rem;
+      background: radial-gradient(circle at 100% 0, rgba(123, 46, 255, 0.3), transparent 50%),
+        rgba(5, 7, 12, 0.98);
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .footer-links a {
+      color: var(--text-tertiary);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    @media (max-width: 960px) {
+      .hero-inner,
+      #about .about-grid,
+      .training-layout,
+      .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-inner {
+        gap: 2.5rem;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .grid-3,
+      .grid-3-2,
+      .industry-grid,
+      .resource-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .training-levels {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: fixed;
+        inset: var(--nav-height) 0 auto 0;
+        background: rgba(5, 7, 14, 0.98);
+        backdrop-filter: blur(24px);
+        border-bottom: 1px solid rgba(79, 157, 255, 0.3);
+        transform: translateY(-120%);
+        transition: transform 0.25s ease-out;
+      }
+
+      nav.open {
+        transform: translateY(0);
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 1.5rem 1.5rem;
+        gap: 0.9rem;
+      }
+
+      .nav-cta {
+        margin-top: 0.3rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #home {
+        padding-top: 4rem;
+      }
+
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      section {
+        padding: 3.2rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <div class="nav-inner">
+        <a href="#home" class="brand">
+          <div class="brand-icon" aria-hidden="true">
+            <svg
+              class="brand-svg"
+              viewBox="0 0 64 64"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="32"
+                cy="32"
+                r="22"
+                fill="none"
+                stroke="rgba(232,236,247,0.8)"
+                stroke-width="1.4"
+              />
+              <polygon
+                points="32,16 44,24 44,40 32,48 20,40 20,24"
+                fill="none"
+                stroke="rgba(232,236,247,0.9)"
+                stroke-width="1.2"
+              />
+              <line x1="32" y1="16" x2="32" y2="8"
+                stroke="rgba(232,236,247,0.65)" stroke-width="1" />
+              <line x1="44" y1="24" x2="52" y2="24"
+                stroke="rgba(232,236,247,0.65)" stroke-width="1" />
+              <line x1="44" y1="40" x2="52" y2="44"
+                stroke="rgba(232,236,247,0.65)" stroke-width="1" />
+              <line x1="20" y1="40" x2="12" y2="44"
+                stroke="rgba(232,236,247,0.65)" stroke-width="1" />
+              <line x1="20" y1="24" x2="12" y2="20"
+                stroke="rgba(232,236,247,0.65)" stroke-width="1" />
+              <circle cx="32" cy="16" r="2.4" fill="#E8ECF7" />
+              <circle cx="44" cy="24" r="2.2" fill="#E8ECF7" />
+              <circle cx="44" cy="40" r="2.2" fill="#E8ECF7" />
+              <circle cx="20" cy="40" r="2.2" fill="#E8ECF7" />
+              <circle cx="20" cy="24" r="2.2" fill="#E8ECF7" />
+              <circle cx="32" cy="32" r="3" fill="#E8ECF7" />
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">GYYANX</span>
+            <span class="brand-tagline">INTELLIGENCE THAT TRANSFORMS</span>
+          </div>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+        </button>
+
+        <nav id="main-nav">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Solutions</a></li>
+            <li><a href="#industries">Industries</a></li>
+            <li><a href="#training">Training</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact" class="nav-cta">Book Consultation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="home">
+        <div class="container hero-inner">
+          <div>
+            <div class="hero-kicker">Enterprise AI • GenAI • RL-GNN</div>
+            <h1 class="hero-title">
+              Transforming <span class="gradient">data-heavy enterprises</span><br />
+              into intelligent organizations.
+            </h1>
+            <p class="hero-text">
+              gyyanX partners with enterprises and tech startups to design, build and
+              scale production-grade AI systems—combining Generative AI, machine
+              learning and hybrid RL-GNN architectures to deliver measurable business
+              impact.
+            </p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn-primary">Book a strategy call</a>
+              <a href="#services" class="btn-secondary">View AI solutions</a>
+            </div>
+            <div class="hero-meta">
+              <span><strong>End-to-end</strong> AI strategy, engineering &amp; MLOps</span>
+              <span><strong>Specialization:</strong> Hybrid RL-GNN query optimization</span>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-stack">
+              <div class="hero-stack-label">gyyanX AI stack</div>
+              <div class="stack-layer layer-data">
+                <span>Data &amp; Sources</span>
+                <small>Databases, APIs, streams, documents</small>
+              </div>
+              <div class="stack-layer layer-models">
+                <span>Models &amp; Intelligence</span>
+                <small>ML, GenAI, RL-GNN, decision engines</small>
+              </div>
+              <div class="stack-layer layer-apps">
+                <span>Applications &amp; Experiences</span>
+                <small>Copilots, dashboards, workflows, services</small>
+              </div>
+              <div class="stack-layer layer-mlops">
+                <span>Monitoring, MLOps &amp; Governance</span>
+                <small>Observability, security, compliance, lifecycle</small>
+              </div>
+            </div>
+            <div class="hero-stack-caption">
+              A clear layered view of how <strong>gyyanX</strong> connects your
+              <strong>data</strong>, <strong>intelligence</strong> and
+              <strong>applications</strong> into one production-ready AI stack.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow">About gyyanX</div>
+            <h2 class="section-title">Your partner for applied AI and digital transformation.</h2>
+            <p class="section-subtitle">
+              We help organizations move beyond experimentation and into production with
+              AI—aligning strategy, architecture and teams to ship real-world systems that
+              endure.
+            </p>
+          </div>
+
+          <div class="about-grid">
+            <div>
+              <p class="about-copy">
+                gyyanX is an AI solutions and consulting company focused on designing and
+                deploying real-world AI systems. From GenAI-powered copilots to
+                RL-GNN-based query optimization, we work across the full lifecycle—
+                strategy, architecture, engineering, training and continuous improvement.
+              </p>
+              <p class="about-copy">
+                Our approach blends research depth with enterprise pragmatism. We align AI
+                initiatives with business outcomes, data realities and operational
+                constraints, ensuring your investments translate into measurable value.
+              </p>
+
+              <div class="pill-list">
+                <span class="pill">AI Strategy &amp; Roadmapping</span>
+                <span class="pill">GenAI &amp; LLM Solutions</span>
+                <span class="pill">Hybrid RL-GNN Optimization</span>
+                <span class="pill">MLOps &amp; Governance</span>
+                <span class="pill">Corporate AI Certification</span>
+              </div>
+            </div>
+
+            <div class="about-panel">
+              <h4>Mission, vision &amp; impact</h4>
+              <p class="card-text">
+                <strong>Mission:</strong> Empower enterprises to responsibly adopt AI
+                systems that drive sustainable business value.
+              </p>
+              <p class="card-text" style="margin-top: 0.4rem;">
+                <strong>Vision:</strong> Become a leading AI transformation partner in
+                Asia for data-intensive organizations and high-growth tech companies.
+              </p>
+
+              <div class="about-metrics">
+                <div class="metric">
+                  <span>End-to-end</span>
+                  AI strategy, build &amp; training in one partner.
+                </div>
+                <div class="metric">
+                  <span>Production-first</span>
+                  Designed for scale, reliability &amp; observability.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow">Solutions &amp; Services</div>
+            <h2 class="section-title">From AI roadmaps to production-grade systems.</h2>
+            <p class="section-subtitle">
+              We cover the complete AI lifecycle: strategy, solution design,
+              implementation, MLOps and team enablement, with a core specialization in
+              performance-critical systems.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <div class="glass-card">
+              <div class="card-kicker">Advisory</div>
+              <h3 class="card-title">AI Strategy &amp; Roadmapping</h3>
+              <p class="card-text">
+                Identify high-impact use cases, assess AI readiness and define a
+                realistic, phased roadmap. We align stakeholders across business, data,
+                and IT to prioritize what matters.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Maturity assessment</span>
+                <span class="chip">Use-case design</span>
+                <span class="chip">ROI modelling</span>
+              </div>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-kicker">Engineering</div>
+              <h3 class="card-title">AI Solution Design &amp; Development</h3>
+              <p class="card-text">
+                Build GenAI, ML and decision-support systems tailored to your
+                stack—chatbots, copilots, recommendation engines, anomaly detection and
+                more.
+              </p>
+              <div class="chip-row">
+                <span class="chip">LLMs &amp; RAG</span>
+                <span class="chip">NLP &amp; CV</span>
+                <span class="chip">APIs &amp; integration</span>
+              </div>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-kicker">Optimization</div>
+              <h3 class="card-title">Hybrid RL-GNN Query Optimization</h3>
+              <p class="card-text">
+                Use RL and GNNs to learn optimal query plans and resource allocation in
+                complex, data-heavy environments—improving latency and cost at scale.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Database-intensive</span>
+                <span class="chip">Self-learning</span>
+                <span class="chip">Performance</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-3-2" style="margin-top: 1.8rem;">
+            <div class="glass-card">
+              <div class="card-kicker">Operations</div>
+              <h3 class="card-title">MLOps, Monitoring &amp; Governance</h3>
+              <p class="card-text">
+                Design pipelines, observability and governance for AI in production:
+                monitoring data drift, model performance, compliance and SLAs.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Pipelines</span>
+                <span class="chip">Monitoring</span>
+                <span class="chip">Governance</span>
+              </div>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-kicker">Capability Building</div>
+              <h3 class="card-title">Corporate Training &amp; Certification</h3>
+              <p class="card-text">
+                Upskill teams with hands-on programs in ML, GenAI and AI engineering,
+                tailored to your stack and real projects.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Workshops</span>
+                <span class="chip">Certification</span>
+                <span class="chip">Labs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="industries">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow">Industries</div>
+            <h2 class="section-title">Designed for data-intensive organizations.</h2>
+            <p class="section-subtitle">
+              We work with enterprises and high-growth tech companies where performance,
+              scale and reliability truly matter.
+            </p>
+          </div>
+
+          <div class="industry-grid">
+            <div class="industry-card">
+              <span class="industry-tag">Finance</span>
+              <h4>Financial Services &amp; Fintech</h4>
+              <p>
+                Risk scoring, fraud detection, anomaly monitoring and intelligent routing
+                for transaction-heavy platforms.
+              </p>
+            </div>
+            <div class="industry-card">
+              <span class="industry-tag">SaaS</span>
+              <h4>Cloud &amp; SaaS Platforms</h4>
+              <p>
+                Query optimization, recommendation engines, in-app copilots and smart
+                analytics for multi-tenant architectures.
+              </p>
+            </div>
+            <div class="industry-card">
+              <span class="industry-tag">Manufacturing</span>
+              <h4>Industry &amp; Manufacturing</h4>
+              <p>
+                Predictive maintenance, quality inspection and real-time anomaly
+                detection across machines and production lines.
+              </p>
+            </div>
+            <div class="industry-card">
+              <span class="industry-tag">Retail</span>
+              <h4>Retail &amp; E-commerce</h4>
+              <p>
+                Personalization, demand forecasting and GenAI-powered support to improve
+                customer experience and operations.
+              </p>
+            </div>
+            <div class="industry-card">
+              <span class="industry-tag">Health</span>
+              <h4>Healthcare &amp; Diagnostics</h4>
+              <p>
+                Decision-support, triage routing, document understanding and workflow
+                automation for clinical and admin teams.
+              </p>
+            </div>
+            <div class="industry-card">
+              <span class="industry-tag">Gov / R&amp;D</span>
+              <h4>Public Sector &amp; Research</h4>
+              <p>
+                Knowledge management, document intelligence and analytical copilots with
+                strong governance and security.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="training">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow">Training &amp; Certification</div>
+            <h2 class="section-title">Build AI-native teams, not just AI projects.</h2>
+            <p class="section-subtitle">
+              Our structured learning paths cover fundamentals to advanced architecture,
+              aligned to your stack and use-cases.
+            </p>
+          </div>
+
+          <div class="training-layout">
+            <div>
+              <p class="about-copy">
+                gyyanX training programs are designed for engineers, data scientists,
+                architects and business teams who need practical skills—not just theory.
+                Each track combines instructor-led sessions, project labs and guided
+                implementation sprints.
+              </p>
+              <p class="about-copy">
+                Programs can be delivered on-site, remote or hybrid, and tailored to your
+                environment (cloud provider, data stack, regulatory context).
+              </p>
+            </div>
+
+            <div>
+              <div class="training-levels">
+                <div class="training-card">
+                  <h4>AI Fundamentals</h4>
+                  <p>
+                    Modern ML, GenAI basics, foundation models and responsible AI
+                    principles for mixed stakeholder groups.
+                  </p>
+                  <div class="training-stack">Audience: Business + Technical</div>
+                </div>
+                <div class="training-card">
+                  <h4>Applied Machine Learning</h4>
+                  <p>
+                    Supervised / unsupervised learning, feature pipelines, evaluation
+                    and deployment best practices.
+                  </p>
+                  <div class="training-stack">Audience: DS / ML Engineers</div>
+                </div>
+                <div class="training-card">
+                  <h4>GenAI &amp; LLM Engineering</h4>
+                  <p>
+                    Prompting, RAG, orchestration, evaluation and safety for
+                    LLM-powered applications.
+                  </p>
+                  <div class="training-stack">Audience: Engineers / Architects</div>
+                </div>
+                <div class="training-card">
+                  <h4>RL-GNN &amp; Optimization</h4>
+                  <p>
+                    Hybrid RL-GNN architectures applied to query planning, resource
+                    allocation and recommendation problems.
+                  </p>
+                  <div class="training-stack">Audience: Advanced / R&amp;D</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resources">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow">Insights &amp; Resources</div>
+            <h2 class="section-title">Stay ahead of the AI curve.</h2>
+            <p class="section-subtitle">
+              Use gyyanX insights to guide your AI decisions—from architecture choices to
+              adoption playbooks.
+            </p>
+          </div>
+
+          <div class="resource-list">
+            <article class="resource-item">
+              <div class="resource-label">Technical Brief</div>
+              <h4>Hybrid RL-GNN for Query Optimization</h4>
+              <p>
+                A deep dive into how reinforcement learning and graph neural networks
+                combine to optimize query planning in complex databases.
+              </p>
+              <a href="articles/rl-gnn-query-optimization.html" class="resource-link">
+                Read brief &rarr;
+              </a>
+            </article>
+
+            <article class="resource-item">
+              <div class="resource-label">Playbook</div>
+              <h4>From AI POCs to Production</h4>
+              <p>
+                A practical framework to move from pilots to scalable AI systems with
+                governance, monitoring and ownership.
+              </p>
+              <a href="#" class="resource-link">Get the playbook &rarr;</a>
+            </article>
+
+            <article class="resource-item">
+              <div class="resource-label">Webinar</div>
+              <h4>Designing GenAI Copilots for Enterprises</h4>
+              <p>
+                Learn how to architect, evaluate and safely deploy GenAI copilots
+                integrated with your core systems.
+              </p>
+              <a href="#" class="resource-link">View upcoming sessions &rarr;</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow">Contact</div>
+            <h2 class="section-title">Ready to explore what AI can do for you?</h2>
+            <p class="section-subtitle">
+              Share a few details and we’ll schedule a discovery call to understand your
+              context and outline potential AI initiatives.
+            </p>
+          </div>
+
+          <div class="contact-layout">
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! We will reach out shortly.');">
+              <div class="form-row">
+                <div class="field">
+                  <label for="name">Full name</label>
+                  <input type="text" id="name" name="name" placeholder="Your name" />
+                </div>
+                <div class="field">
+                  <label for="company">Company</label>
+                  <input type="text" id="company" name="company" placeholder="Organization" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field">
+                  <label for="email">Work email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@company.com"
+                  />
+                </div>
+                <div class="field">
+                  <label for="role">Role</label>
+                  <input
+                    type="text"
+                    id="role"
+                    name="role"
+                    placeholder="e.g. CTO, Head of Data"
+                  />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="interest">Primary interest</label>
+                <select id="interest" name="interest">
+                  <option value="">Select an option</option>
+                  <option>AI Strategy &amp; Roadmap</option>
+                  <option>AI Solution Design &amp; Build</option>
+                  <option>RL-GNN Query Optimization</option>
+                  <option>MLOps &amp; Governance</option>
+                  <option>Training &amp; Certification</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="message">Tell us about your context</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="What are you trying to achieve with AI? What systems or data are in scope?"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary" style="margin-top: 0.4rem;">
+                Submit &amp; schedule discovery
+              </button>
+            </form>
+
+            <div>
+              <p class="contact-meta">
+                Prefer to reach out directly? Email us at
+                <strong>contact@gyyanx.com</strong> and we’ll respond with options for a
+                call, workshop or technical deep-dive.
+              </p>
+              <div class="contact-chips">
+                <span class="contact-chip">Premium enterprise engagements</span>
+                <span class="contact-chip">Architect-to-architect conversations</span>
+                <span class="contact-chip">NDA-friendly discussions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>© <span id="year"></span> gyyanX. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#services">Solutions</a>
+          <a href="#training">Training</a>
+          <a href="#resources">Resources</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const toggle = document.querySelector(".nav-toggle");
+    const nav = document.getElementById("main-nav");
+
+    if (toggle && nav) {
+      toggle.addEventListener("click", () => {
+        nav.classList.toggle("open");
+      });
+
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("open");
+        });
+      });
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
