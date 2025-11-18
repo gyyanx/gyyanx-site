@@ -2,251 +2,863 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Technical Brief – RL + GNN for Intelligent Query Optimization | gyyanX</title>
+  <title>Technical Brief – RL + GNN for Query Optimization | gyyanX</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A deep dive into how reinforcement learning and graph neural networks combine to optimize query planning in complex databases." />
+  <meta
+    name="description"
+    content="A deep dive into how reinforcement learning and graph neural networks combine to optimize query planning in complex, data-intensive databases."
+  />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     :root {
       --primary: #00c8ff;
       --secondary: #7b2eff;
       --accent: #4f9dff;
+
       --bg: #05060a;
-      --surface-soft: #101426;
+      --surface: #101426;
+      --surface-soft: #151a2d;
+
       --text-primary: #e8ecf7;
       --text-secondary: #a8b3ca;
       --text-tertiary: #76819b;
+
       --radius-lg: 18px;
+      --radius-md: 12px;
       --shadow-soft: 0 0 22px rgba(0, 200, 255, 0.25);
-      --width: 930px;
+
+      --max-width: 980px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: radial-gradient(circle at 0 0, #161b33, #05060a 45%, #000);
-      min-height: 100vh;
-      font-family: "Inter", sans-serif;
+      background: radial-gradient(circle at 0 0, #161b33 0, #05060a 45%, #000 100%);
       color: var(--text-primary);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
     }
 
-    .page {
-      width: min(var(--width), 100%);
-      padding: 32px 18px 48px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    a { color: inherit; text-decoration: none; }
+    .page {
+      width: min(var(--max-width), 100%);
+      padding: 2.4rem 1.5rem 3.2rem;
+    }
 
-    /* Header */
+    /* Header / brand area */
     .header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 22px;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.6rem;
       flex-wrap: wrap;
     }
 
     .back-link {
       font-size: 0.82rem;
       color: var(--text-tertiary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
     }
-    .back-link:hover { color: var(--primary); }
+
+    .back-link span {
+      font-size: 1rem;
+    }
+
+    .back-link:hover {
+      color: var(--primary);
+    }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 0.75rem;
     }
 
     .brand-circle {
-      width: 38px; height: 38px; border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
       background: radial-gradient(circle at 30% 0, var(--primary), var(--secondary));
-      display: flex; align-items: center; justify-content: center;
       box-shadow: var(--shadow-soft);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
     }
 
     .brand-name {
       font-family: "Exo 2", sans-serif;
       font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.15em;
+      font-size: 0.96rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
 
-    .brand-tag {
+    .brand-tagline {
       font-size: 0.7rem;
-      color: var(--text-tertiary);
       text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-tertiary);
     }
 
-    /* Title */
+    /* Title block */
     .eyebrow {
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      color: var(--primary);
+      font-size: 0.82rem;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      letter-spacing: 0.16em;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
     }
 
     .title {
       font-family: "Exo 2", sans-serif;
-      font-size: 2rem;
+      font-size: 2.1rem;
       line-height: 1.2;
-      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.7rem;
     }
 
     .subtitle {
-      font-size: 1rem;
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.1rem;
+      max-width: 720px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      margin-bottom: 1.6rem;
+    }
+
+    .meta-row span strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* Layout: summary + content */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.1fr);
+      gap: 1.6rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 840px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .summary-card {
+      background: radial-gradient(circle at 100% 0, rgba(0, 200, 255, 0.18), transparent 50%),
+        rgba(16, 20, 38, 0.96);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(79, 157, 255, 0.35);
+      padding: 1.2rem 1.3rem;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 1.7rem;
+    }
+
+    .summary-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .summary-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .summary-kv {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
       color: var(--text-secondary);
       line-height: 1.6;
-      margin-bottom: 20px;
+    }
+
+    .summary-kv strong {
+      color: var(--text-primary);
+      min-width: 90px;
+      display: inline-block;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 1.9rem;
     }
 
     .section-title {
       font-family: "Exo 2", sans-serif;
-      margin: 26px 0 10px;
-      font-size: 1.3rem;
-      border-left: 4px solid var(--primary);
-      padding-left: 8px;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      border-left: 3px solid var(--primary);
+      padding-left: 0.5rem;
     }
 
-    p {
-      font-size: 1rem;
+    .section p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 0.7rem;
+    }
+
+    .section ul {
+      margin-left: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .section li {
+      font-size: 0.93rem;
       color: var(--text-secondary);
       line-height: 1.7;
-      margin-bottom: 12px;
+      margin-bottom: 0.25rem;
     }
 
-    ul { margin: 0 0 12px 24px; }
-    li { margin-bottom: 6px; }
-
-    .table {
-      border: 1px solid rgba(79,157,255,0.3);
-      border-radius: var(--radius-lg);
-      padding: 14px;
-      margin: 12px 0;
-      background: rgba(16,20,38,0.9);
-    }
-
-    .cta {
-      margin-top: 32px;
+    .pill-row {
       display: flex;
-      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(79, 157, 255, 0.5);
+      font-size: 0.75rem;
+      padding: 0.23rem 0.7rem;
+      color: var(--text-tertiary);
+      background: rgba(10, 13, 23, 0.9);
+    }
+
+    /* Tables */
+    .table-wrapper {
+      margin: 0.6rem 0 0.9rem;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      background: rgba(16, 20, 38, 0.96);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(79, 157, 255, 0.35);
+    }
+
+    th,
+    td {
+      padding: 0.55rem 0.7rem;
+      border-bottom: 1px solid rgba(44, 51, 71, 0.9);
+      text-align: left;
+    }
+
+    th {
+      background: rgba(9, 13, 25, 0.9);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(18, 22, 40, 0.9);
+    }
+
+    /* Highlight callouts */
+    .callout {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(0, 200, 255, 0.45);
+      background: rgba(10, 13, 24, 0.93);
+      padding: 0.8rem 0.9rem;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 0.5rem;
+    }
+
+    .callout strong {
+      color: var(--text-primary);
+    }
+
+    .callout-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    /* Architecture box */
+    .arch-box {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(79, 157, 255, 0.4);
+      background: rgba(16, 20, 38, 0.96);
+      padding: 0.9rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-top: 0.5rem;
+    }
+
+    .arch-layers {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .arch-layers li {
+      margin-bottom: 0.4rem;
+    }
+
+    .arch-layers strong {
+      color: var(--text-primary);
+    }
+
+    /* Metrics cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.7rem;
+    }
+
+    .metric-card {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(79, 157, 255, 0.35);
+      background: rgba(16, 20, 38, 0.96);
+      padding: 0.8rem 0.9rem;
+    }
+
+    .metric-value {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.1rem;
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 720px) {
+      .metrics-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Side panel */
+    .side-panel {
+      background: rgba(10, 13, 23, 0.95);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(79, 157, 255, 0.35);
+      padding: 1rem 1.1rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .side-panel h3 {
+      font-family: "Exo 2", sans-serif;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .side-panel ul {
+      margin-left: 1.1rem;
+      margin-top: 0.3rem;
+    }
+
+    .side-panel li {
+      margin-bottom: 0.3rem;
+    }
+
+    .side-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    /* CTA footer */
+    .cta {
+      margin-top: 2.2rem;
+      border-top: 1px solid rgba(44, 51, 71, 0.9);
+      padding-top: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
     }
 
     .cta-btn {
-      padding: 10px 22px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      border-radius: 20px;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #02040a;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #021016;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      font-weight: 600;
+      cursor: pointer;
       box-shadow: var(--shadow-soft);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .cta-btn:hover {
+      filter: brightness(1.05);
     }
   </style>
 </head>
-
 <body>
   <div class="page">
-    
     <!-- Header -->
-    <div class="header">
-      <a href="../index.html#resources" class="back-link">← Back to Resources</a>
+    <header class="header">
+      <a href="../index.html#resources" class="back-link">
+        <span>←</span> Back to gyyanX Resources
+      </a>
       <a href="../index.html" class="brand">
-        <div class="brand-circle"></div>
-        <div>
-          <div class="brand-name">GYYANX</div>
-          <div class="brand-tag">Intelligence That Transforms</div>
+        <div class="brand-circle" aria-hidden="true"></div>
+        <div class="brand-text">
+          <span class="brand-name">GYYANX</span>
+          <span class="brand-tagline">INTELLIGENCE THAT TRANSFORMS</span>
         </div>
       </a>
-    </div>
+    </header>
 
-    <!-- Title -->
+    <!-- Title Block -->
     <div class="eyebrow">Technical Brief</div>
-    <h1 class="title">A Deep Dive into Reinforcement Learning + Graph Neural Networks for Optimized Query Planning</h1>
+    <h1 class="title">Reinforcement Learning + Graph Neural Networks for Intelligent Query Optimization</h1>
     <p class="subtitle">
-      Traditional query optimizers rely on static heuristics and classical cost models, which degrade in rapidly evolving, complex database environments. Reinforcement learning combined with graph neural networks (GNNs) offers a dynamic, feedback-driven, and structure-aware solution that continuously self-adapts to changing workloads.
+      This brief explains how hybrid reinforcement learning (RL) and graph neural network (GNN)
+      architectures can learn to generate better query execution plans than traditional
+      rule-based optimizers in complex, data-intensive environments.
     </p>
 
-    <!-- Motivations -->
-    <h2 class="section-title">1. Why Traditional Query Optimization Struggles</h2>
-    <p>Database optimizers face modern challenges such as workload variability, complex joins, shifting data statistics, and unpredictable resource contention. Cost-based optimizers (CBO) cannot fully adapt because:</p>
-    <ul>
-      <li>Estimation errors propagate and amplify across join trees</li>
-      <li>Lack of runtime feedback and online re-learning</li>
-      <li>Plan search space is exponential as queries scale</li>
-      <li>Static heuristics cannot evolve with live behavior</li>
-    </ul>
-
-    <!-- Graph Representation -->
-    <h2 class="section-title">2. Query Plans as Graphs</h2>
-    <p>Query execution plans can be expressed as graph structures:</p>
-    <ul>
-      <li>Nodes represent operators (scan, join, sort, filter, project, aggregate)</li>
-      <li>Edges represent data-flow and dependency relations</li>
-      <li>Node/edge features encode cost, cardinality, selectivity, I/O, or memory</li>
-    </ul>
-
-    <p>GNNs can learn spatial-relational patterns, making them ideal for understanding complex plan topology.</p>
-
-    <!-- Combined Architecture -->
-    <h2 class="section-title">3. The RL + GNN Hybrid Architecture</h2>
-    <div class="table">
-      <p><strong>State:</strong> Graph embedding of the current plan</p>
-      <p><strong>Action:</strong> Join order decisions, operator choice, parallelism, index use</p>
-      <p><strong>Reward:</strong> Improvement in latency, I/O, cost, or stability</p>
+    <div class="meta-row">
+      <span><strong>Audience:</strong> Architects, data platform teams, performance engineers</span>
+      <span><strong>Focus:</strong> Analytical / OLAP & mixed workloads</span>
+      <span><strong>Primary value:</strong> Latency & cost optimization at scale</span>
     </div>
 
-    <p>The workflow forms a closed feedback loop:</p>
-    <ol>
-      <li>Encode plan structure via GNN</li>
-      <li>RL agent selects next optimization action</li>
-      <li>Plan executes in controlled environment</li>
-      <li>Runtime statistics become reward signals</li>
-    </ol>
+    <div class="layout">
+      <!-- Main content -->
+      <div>
+        <!-- Summary -->
+        <div class="summary-card">
+          <div class="summary-label">Snapshot</div>
+          <p class="summary-text">
+            Traditional cost-based optimizers rely on hand-crafted heuristics and brittle cost
+            models. By treating query planning as a sequential decision process and representing
+            plans as graphs, a hybrid RL-GNN agent can learn from execution feedback, adapt to
+            workload shifts, and generalize across new queries without manual tuning.
+          </p>
+          <div class="summary-kv">
+            <strong>Core idea:</strong> Learn query plans from experience, not just rules<br />
+            <strong>Key techniques:</strong> Graph embeddings + RL policy learning<br />
+            <strong>Outcomes:</strong> Reduced latency, more stable QoS, lower compute waste
+          </div>
+        </div>
 
-    <!-- Reward Engineering -->
-    <h2 class="section-title">4. Reward Design</h2>
-    <p>Reward functions must balance latency reduction, resource stability, and safety.</p>
+        <!-- 1. Why classical optimization struggles -->
+        <section class="section">
+          <h2 class="section-title">1. Why classical query optimization struggles</h2>
+          <p>
+            Cost-based optimizers were designed when workloads and hardware were relatively
+            stable. In today’s cloud-scale systems—with multi-tenant workloads, semi-structured
+            data, and elastic compute—the assumptions behind these optimizers break down.
+          </p>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Challenge</th>
+                  <th>Cause</th>
+                  <th>Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cardinality errors</td>
+                  <td>Outdated statistics, complex predicates</td>
+                  <td>Cascading misestimation across joins</td>
+                </tr>
+                <tr>
+                  <td>Join explosion</td>
+                  <td>Exponential plan search space</td>
+                  <td>Heuristics prune good plans prematurely</td>
+                </tr>
+                <tr>
+                  <td>Workload drift</td>
+                  <td>New tenants, features, query patterns</td>
+                  <td>Cost model becomes stale and misaligned</td>
+                </tr>
+                <tr>
+                  <td>Resource contention</td>
+                  <td>Shared CPU, memory, I/O in cloud</td>
+                  <td>Plan optimality depends on context, not static costs</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Critically, classical optimizers are mostly <strong>one-shot</strong>: they do not
+            systematically learn from their own mistakes. The system may log slow queries, but
+            the optimizer itself is not a learning component.
+          </p>
+        </section>
 
-    <div class="table">
-      <p>Reward = − (Latency + Memory Penalty + Spill Penalty + Variance Cost)</p>
+        <!-- 2. Query plans as graphs -->
+        <section class="section">
+          <h2 class="section-title">2. Query plans as graphs</h2>
+          <p>
+            SQL queries and execution plans naturally form graphs or DAGs (directed acyclic graphs):
+          </p>
+          <ul>
+            <li><strong>Nodes</strong> represent operators: scans, filters, joins, aggregates, sorts, limits.</li>
+            <li><strong>Edges</strong> represent dataflow: which operator feeds into which.</li>
+            <li><strong>Node features</strong> capture statistics (cardinality, row width, selectivity, cost estimates).</li>
+            <li><strong>Graph-level features</strong> capture workload, tenant, or session context.</li>
+          </ul>
+          <div class="callout">
+            <div class="callout-title">Key insight</div>
+            <div>
+              If query plans are graphs, then <strong>graph neural networks</strong> are
+              a natural fit to encode them. GNNs learn rich embeddings that capture structural
+              patterns in plans that are difficult to capture with flat feature vectors.
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. RL formulation -->
+        <section class="section">
+          <h2 class="section-title">3. Formulating query planning as reinforcement learning</h2>
+          <p>
+            In a reinforcement learning setup, the optimizer is treated as an agent making a
+            sequence of decisions to construct or adjust a query plan.
+          </p>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>MDP Element</th>
+                  <th>Meaning in query planning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>State</strong></td>
+                  <td>Current partial or full plan + graph embedding + workload context</td>
+                </tr>
+                <tr>
+                  <td><strong>Action</strong></td>
+                  <td>Choose next join, operator configuration, index usage, parallelism, hint</td>
+                </tr>
+                <tr>
+                  <td><strong>Transition</strong></td>
+                  <td>Resulting updated plan and expected cost after applying action</td>
+                </tr>
+                <tr>
+                  <td><strong>Reward</strong></td>
+                  <td>Signal based on actual execution: latency, cost, resource usage, QoS</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Popular RL choices include:
+          </p>
+          <ul>
+            <li>
+              <strong>Deep Q-Networks (DQN)</strong> for discrete decisions
+              (e.g. next join pair, hint selection).
+            </li>
+            <li>
+              <strong>PPO / Actor-Critic</strong> for continuous knobs
+              (e.g. degrees of parallelism, memory fractions).
+            </li>
+          </ul>
+        </section>
+
+        <!-- 4. GNN + RL hybrid architecture -->
+        <section class="section">
+          <h2 class="section-title">4. Hybrid RL–GNN architecture</h2>
+          <p>
+            The RL agent does not work directly on raw SQL or ad-hoc feature vectors. Instead,
+            GNNs provide a compact, expressive representation of the query plan graph.
+          </p>
+
+          <div class="arch-box">
+            <ul class="arch-layers">
+              <li><strong>1. Plan graph construction:</strong> Extract logical or physical plan as a graph.</li>
+              <li><strong>2. GNN encoder:</strong> Compute node embeddings and a graph-level embedding.</li>
+              <li><strong>3. RL policy head:</strong> Take the embedding as input and output action probabilities or values.</li>
+              <li><strong>4. Environment execution:</strong> Apply action, generate new plan, execute in DB, observe performance.</li>
+              <li><strong>5. Feedback loop:</strong> Use observed latency/cost as reward to update the policy.</li>
+            </ul>
+          </div>
+
+          <p>
+            Common GNN architectures:
+          </p>
+          <ul>
+            <li><strong>GCN / GraphSAGE</strong> for scalable message passing.</li>
+            <li><strong>GAT</strong> to focus attention on critical joins or operators.</li>
+            <li><strong>GIN</strong> when strong discriminative power between similar plans is needed.</li>
+          </ul>
+        </section>
+
+        <!-- 5. Reward engineering -->
+        <section class="section">
+          <h2 class="section-title">5. Reward engineering for real systems</h2>
+          <p>
+            A naïve reward like “negative latency” is not enough. Real systems care about multiple
+            objectives: performance, cost, stability, and safety. A typical formulation:
+          </p>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Description</th>
+                  <th>Example term</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Latency</td>
+                  <td>End-to-end query response time</td>
+                  <td>− normalized_latency</td>
+                </tr>
+                <tr>
+                  <td>Resource usage</td>
+                  <td>CPU time, memory, I/O</td>
+                  <td>− α · cpu_cost − β · io_cost</td>
+                </tr>
+                <tr>
+                  <td>Stability</td>
+                  <td>Variance across runs / tenants</td>
+                  <td>− γ · latency_variance</td>
+                </tr>
+                <tr>
+                  <td>Safety</td>
+                  <td>Penalize extreme slowdowns or OOM</td>
+                  <td>− large_penalty_on_violation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            In practice, the reward is often a weighted sum of these components, tuned per
+            environment:
+          </p>
+          <div class="callout">
+            <strong>Example:</strong><br />
+            <code>R = − (latency_norm + 0.4 · cpu_norm + 0.2 · io_norm + 0.3 · variance_norm) − safety_penalty</code>
+          </div>
+        </section>
+
+        <!-- 6. Training & deployment modes -->
+        <section class="section">
+          <h2 class="section-title">6. Training and deployment modes</h2>
+          <p>There are several practical ways to train and deploy an RL–GNN optimizer:</p>
+          <ul>
+            <li>
+              <strong>Offline training on logs:</strong> Start from historical query logs and
+              simulation to avoid impacting production early.
+            </li>
+            <li>
+              <strong>Shadow mode:</strong> RL–GNN generates plans in parallel, but production
+              still uses the baseline optimizer. Metrics are compared offline.
+            </li>
+            <li>
+              <strong>Canary rollout:</strong> Route a small percentage of eligible queries
+              to the RL–GNN optimizer with strict safety guards and fallbacks.
+            </li>
+            <li>
+              <strong>Online adaptation:</strong> Periodically re-train or fine-tune the policy
+              using new production data to track workload drift.
+            </li>
+          </ul>
+        </section>
+
+        <!-- 7. Example stack and results -->
+        <section class="section">
+          <h2 class="section-title">7. Example stack and reported improvements</h2>
+          <p>
+            A typical engineering stack for such a system looks like this:
+          </p>
+          <ul>
+            <li><strong>Data engines:</strong> PostgreSQL, MySQL, Spark SQL, or cloud warehouses.</li>
+            <li><strong>Logging:</strong> Query plans, execution stats, and resource usage in a
+                time-series store or data lake.</li>
+            <li><strong>GNN + RL:</strong> PyTorch / PyTorch Geometric, DGL, Stable-Baselines3, or Ray RLlib.</li>
+            <li><strong>Serving:</strong> A sidecar optimization service (e.g., FastAPI/gRPC) consulted
+                before finalizing plans.</li>
+          </ul>
+
+          <p>
+            Research and early production deployments have reported improvements in the following ranges:
+          </p>
+
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-value">30–65%</div>
+              <div class="metric-label">Reduction in median query latency</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">40–70%</div>
+              <div class="metric-label">Reduction in cost-model error</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">Up to 50%</div>
+              <div class="metric-label">Reduction in wasted compute on heavy workloads</div>
+            </div>
+          </div>
+
+          <div class="callout" style="margin-top: 0.8rem;">
+            <div class="callout-title">Interpretation</div>
+            <div>
+              Exact numbers depend on workload, engine and tuning. The important takeaway is that
+              a learning-based optimizer can <strong>keep improving over time</strong>, unlike
+              static rule sets.
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Limitations and risks -->
+        <section class="section">
+          <h2 class="section-title">8. Limitations and risks</h2>
+          <p>RL–GNN systems are powerful but not magic. Key considerations:</p>
+          <ul>
+            <li>
+              <strong>Training cost:</strong> Good policies require high-quality logs or simulation.
+            </li>
+            <li>
+              <strong>Explainability:</strong> Plans chosen by a learned policy may be harder
+              to explain than rule-based decisions.
+            </li>
+            <li>
+              <strong>Safety:</strong> Exploration must be constrained to avoid pathological plans
+              in production; guardrails and fallbacks are mandatory.
+            </li>
+            <li>
+              <strong>Maintenance:</strong> Models must be monitored, versioned, and retrained
+              as systems evolve.
+            </li>
+          </ul>
+        </section>
+
+        <!-- 9. Conclusion -->
+        <section class="section">
+          <h2 class="section-title">9. Conclusion</h2>
+          <p>
+            Hybrid reinforcement learning and graph neural network optimizers represent a
+            step-change in how data platforms think about performance. Instead of freezing
+            behavior into static heuristics, the system learns from experience and continuously
+            adapts to live workloads.
+          </p>
+          <p>
+            For organizations running large analytical or mixed workloads, an RL–GNN optimizer
+            can become a strategic capability: compressing costs, stabilizing SLAs, and providing
+            a foundation for autonomous data infrastructure.
+          </p>
+        </section>
+      </div>
+
+      <!-- Side panel -->
+      <aside class="side-panel">
+        <div class="side-label">What this brief covers</div>
+        <h3>Scope</h3>
+        <ul>
+          <li>Conceptual architecture of RL–GNN query optimizers</li>
+          <li>How query plans are modeled as graphs</li>
+          <li>MDP formulation and reward design</li>
+          <li>Deployment and risk considerations</li>
+        </ul>
+
+        <div style="margin-top: 1rem;">
+          <div class="side-label">Where it applies</div>
+          <ul>
+            <li>Analytics / OLAP engines</li>
+            <li>Multi-tenant SaaS platforms</li>
+            <li>Data warehouses and lakehouses</li>
+            <li>Streaming analytics with heavy joins</li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <div class="side-label">How gyyanX can help</div>
+          <p>
+            gyyanX works with data platform teams to:
+          </p>
+          <ul>
+            <li>Assess readiness for learning-based optimization</li>
+            <li>Design RL–GNN architectures aligned to your stack</li>
+            <li>Build PoCs, run shadow experiments and canary rollouts</li>
+            <li>Productionize models with monitoring and governance</li>
+          </ul>
+        </div>
+      </aside>
     </div>
-
-    <!-- Deployment -->
-    <h2 class="section-title">5. Deployment Modes</h2>
-    <ul>
-      <li><strong>Offline learning:</strong> Log-replay training</li>
-      <li><strong>Shadow mode:</strong> Compare vs baseline silently</li>
-      <li><strong>Canary:</strong> Gradual rollout</li>
-      <li><strong>Live feedback:</strong> Continuous policy tuning</li>
-    </ul>
-    
-    <!-- Results -->
-    <h2 class="section-title">6. Observed Benefits (Reported in Research)</h2>
-    <ul>
-      <li>30–65% query latency reduction</li>
-      <li>40–70% lower model estimation error</li>
-      <li>Up to 50% reduction in compute waste</li>
-      <li>Adaptive performance under workload drift</li>
-    </ul>
-
-    <!-- Conclusion -->
-    <h2 class="section-title">7. Conclusion</h2>
-    <p>The RL-GNN fusion represents an evolution from traditional rule-driven optimization toward autonomous, self-correcting intelligence in database engines, especially relevant for multi-tenant, cloud-scale, analytics-heavy workloads.</p>
 
     <!-- CTA -->
-    <div class="cta">
-      <a href="../index.html#contact" class="cta-btn">Contact gyyanX</a>
-    </div>
+    <footer class="cta">
+      <div>
+        Interested in exploring an RL–GNN optimizer for your data platform?  
+        We can run a discovery session or technical deep-dive with your team.
+      </div>
+      <a href="../index.html#contact" class="cta-btn">Talk to gyyanX</a>
+    </footer>
   </div>
 </body>
 </html>
-
