@@ -269,6 +269,44 @@
       gap: 3rem;
       align-items: center;
     }
+    /* HERO */
+#home {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.hero-inner {
+  ...
+}
+
+/* FEATURED INSIGHT (HOME PAGE) */
+.featured-insight {
+  margin-top: 1.2rem;
+  padding: 0.9rem 1.2rem;
+  border-left: 3px solid var(--primary);
+  background: rgba(18, 23, 34, 0.6);
+  font-size: 0.88rem;
+  max-width: 520px;
+}
+
+.featured-insight span {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.featured-insight a {
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.featured-insight a:hover {
+  color: var(--primary);
+}
+
 
     .hero-kicker {
       font-size: 0.8rem;
@@ -300,6 +338,34 @@
       max-width: 520px;
       margin-bottom: 1.75rem;
     }
+    /* FEATURED INSIGHT (HOME – HERO) */
+.featured-insight {
+  margin-top: 1.2rem;
+  padding: 0.9rem 1.2rem;
+  border-left: 3px solid var(--primary);
+  background: rgba(18, 23, 34, 0.6);
+  font-size: 0.88rem;
+  max-width: 520px;
+}
+
+.featured-insight span {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.featured-insight a {
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.featured-insight a:hover {
+  color: var(--primary);
+}
+
 
     .hero-actions {
       display: flex;
@@ -920,6 +986,40 @@
               <circle cx="20" cy="40" r="2.2" fill="#E8ECF7" />
               <circle cx="20" cy="24" r="2.2" fill="#E8ECF7" />
               <circle cx="32" cy="32" r="3" fill="#E8ECF7" />
+              .resource-card {
+  background: linear-gradient(
+                160deg,
+                rgba(18, 23, 34, 0.9),
+                rgba(12, 16, 28, 0.95)
+              );
+              border: 1px solid rgba(79, 157, 255, 0.25);
+              border-radius: var(--radius-md);
+              padding: 1.8rem;
+              max-width: 520px;
+              box-shadow: var(--shadow-soft);
+            }
+            
+            .resource-card h3 {
+              font-family: "Exo 2", system-ui, sans-serif;
+              font-size: 1.2rem;
+              margin-bottom: 0.6rem;
+            }
+            
+            .resource-card p {
+              font-size: 0.95rem;
+              color: var(--text-secondary);
+              line-height: 1.6;
+            }
+            
+            .resource-link {
+              display: inline-block;
+              margin-top: 1rem;
+              font-size: 0.82rem;
+              text-transform: uppercase;
+              letter-spacing: 0.14em;
+              color: var(--primary);
+            }
+
             </svg>
           </div>
           <div class="brand-text">
@@ -956,15 +1056,37 @@
               into intelligent organizations.
             </h1>
             <p class="hero-text">
+              <div class="featured-insight">
+  <span>Featured Research</span>
+  <a href="/articles/intelligent-work-fabric-executive-summary.html">
+    Intelligent Work Fabric™ — Designing AI-Native Enterprises →
+  </a>
+</div>
+
               gyyanX partners with enterprises and tech startups to design, build and
               scale production-grade AI systems—combining Generative AI, machine
               learning and hybrid RL-GNN architectures to deliver measurable business
               impact.
             </p>
-            <div class="hero-actions">
-              <a href="#contact" class="btn-primary">Book a strategy call</a>
-              <a href="#services" class="btn-secondary">View AI solutions</a>
+            <div class="featured-insight">
+              <span>Featured Research</span>
+              <a href="/articles/intelligent-work-fabric-executive-summary.html">
+                Intelligent Work Fabric™ — Designing AI-Native Enterprises →
+              </a>
             </div>
+
+            <div class="hero-actions">
+  <a href="/articles/intelligent-work-fabric-executive-summary.html"
+     class="btn-primary">
+    Read Our Flagship Framework
+  </a>
+
+  <a href="#resources" class="btn-secondary">
+    Explore Resources
+  </a>
+</div>
+
+
             <div class="hero-meta">
               <span><strong>End-to-end</strong> AI strategy, engineering &amp; MLOps</span>
               <span><strong>Specialization:</strong> Hybrid RL-GNN query optimization</span>
@@ -1289,6 +1411,17 @@
               Use gyyanX insights to guide your AI decisions—from architecture choices to
               adoption playbooks.
             </p>
+          </div>
+<div class="resource-card">
+            <h3>Intelligent Work Fabric™</h3>
+            <p>
+              A definitive operating-model framework for designing AI-native enterprises,
+              enabling scalable human–AI collaboration with embedded governance.
+            </p>
+          
+            <a href="/articles/intelligent-work-fabric.html" class="resource-link">
+              Explore the Framework →
+            </a>
           </div>
 
           <div class="resource-list">
