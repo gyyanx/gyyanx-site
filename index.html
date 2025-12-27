@@ -75,6 +75,24 @@
 
     section { padding:4rem 1.5rem; }
     .container { max-width:var(--max-width); margin:auto; }
+    /* === FLAGSHIP RESOURCE (SAFE OVERRIDE) === */
+.resource-flagship {
+  border: 1px solid rgba(0, 200, 255, 0.55);
+  background:
+    radial-gradient(circle at 0 0, rgba(0, 200, 255, 0.18), transparent 60%),
+    rgba(12, 16, 30, 0.96);
+  box-shadow: 0 0 28px rgba(0, 200, 255, 0.25);
+}
+
+.resource-flagship h4 {
+  font-size: 1.05rem;
+}
+
+.resource-flagship .resource-label {
+  color: var(--primary);
+  font-weight: 600;
+}
+
 
     /* HERO */
     #home { padding-top:5rem; }
@@ -283,7 +301,8 @@
     </div>
 
     <div class="resource-list">
-      <article class="resource-item">
+     <article class="resource-item resource-flagship">
+
         <div class="resource-label">Research Framework</div>
         <h4>Intelligent Work Fabric™</h4>
         <p>
