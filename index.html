@@ -4,55 +4,280 @@
   <meta charset="UTF-8" />
   <title>gyyanX – Intelligence That Transforms</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta
-    name="description"
-    content="gyyanX helps enterprises and tech startups design, build and scale AI solutions with GenAI, ML, RL-GNN optimization and enterprise-grade training."
-  />
+  <meta name="description"
+        content="gyyanX helps enterprises and tech startups design, build and scale AI solutions with GenAI, ML, RL-GNN optimization and enterprise-grade training." />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
 
   <style>
     :root {
-      --primary: #00c8ff;
-      --secondary: #7b2eff;
-      --accent: #4f9dff;
+      --primary:#00c8ff;
+      --secondary:#7b2eff;
+      --accent:#4f9dff;
 
-      --surface-900: #0a0d14;
-      --surface-700: #121722;
-      --surface-500: #1c2333;
-      --divider: #2c3347;
+      --text-primary:#e8ecf7;
+      --text-secondary:#a8b3ca;
+      --text-tertiary:#76819b;
 
-      --text-primary: #e8ecf7;
-      --text-secondary: #a8b3ca;
-      --text-tertiary: #76819b;
+      --radius-lg:18px;
+      --radius-md:12px;
 
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --shadow-soft: 0 0 24px rgba(0, 200, 255, 0.25);
-      --shadow-strong: 0 0 40px rgba(0, 200, 255, 0.3);
+      --shadow-soft:0 0 24px rgba(0,200,255,.25);
+      --shadow-strong:0 0 40px rgba(0,200,255,.3);
 
-      --max-width: 1120px;
-      --nav-height: 80px;
+      --max-width:1120px;
+      --nav-height:80px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing:border-box; margin:0; padding:0; }
 
     body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+      font-family:Inter,system-ui,sans-serif;
+      background:radial-gradient(circle at 0 0,#161b33 0,#05060a 45%,#000 100%);
+      color:var(--text-primary);
+    }
+
+    a { color:inherit; text-decoration:none; }
+
+    header {
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(18px);
+      background:rgba(10,13,20,.9);
+      border-bottom:1px solid rgba(79,157,255,.25);
+    }
+
+    .nav-inner {
+      max-width:var(--max-width);
+      height:var(--nav-height);
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 1.5rem;
+    }
+
+    nav ul {
+      list-style:none;
+      display:flex;
+      gap:1.5rem;
+    }
+
+    nav a {
+      font-size:.85rem;
+      color:var(--text-secondary);
+    }
+
+    section { padding:4rem 1.5rem; }
+
+    .container { max-width:var(--max-width); margin:auto; }
+
+    /* HERO */
+    #home { padding-top:5rem; }
+
+    .hero-inner {
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:3rem;
+      align-items:center;
+    }
+
+    .hero-kicker {
+      font-size:.8rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--primary);
+      margin-bottom:.8rem;
+    }
+
+    .hero-title {
+      font-family:"Exo 2",sans-serif;
+      font-size:2.9rem;
+      line-height:1.1;
+      margin-bottom:1rem;
+    }
+
+    .hero-title span {
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .hero-text {
+      max-width:520px;
+      font-size:1rem;
+      line-height:1.75;
+      color:var(--text-secondary);
+      margin-bottom:1.5rem;
+    }
+
+    /* FEATURED INSIGHT */
+    .featured-insight {
+      margin-bottom:1.6rem;
+      padding:.9rem 1.2rem;
+      border-left:3px solid var(--primary);
+      background:rgba(18,23,34,.6);
+      max-width:520px;
+    }
+
+    .featured-insight span {
+      display:block;
+      font-size:.7rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--primary);
+      margin-bottom:.25rem;
+    }
+
+    .hero-actions {
+      display:flex;
+      gap:.9rem;
+      margin-bottom:1.4rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding:.8rem 1.4rem;
+      border-radius:999px;
+      font-size:.8rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+
+    .btn-primary {
+      background:linear-gradient(90deg,var(--primary),var(--accent));
+      color:#02040a;
+      box-shadow:var(--shadow-strong);
+    }
+
+    .btn-secondary {
+      border:1px solid rgba(79,157,255,.6);
+      color:var(--text-primary);
+    }
+
+    /* RESOURCES */
+    .resource-card {
+      background:rgba(12,16,30,.96);
+      border:1px solid rgba(44,51,71,.9);
+      border-radius:var(--radius-md);
+      padding:1.5rem;
+      max-width:520px;
+      margin-bottom:2rem;
+    }
+
+    .resource-card h3 {
+      font-family:"Exo 2",sans-serif;
+      margin-bottom:.6rem;
+    }
+
+    .resource-card p {
+      font-size:.95rem;
+      color:var(--text-secondary);
+      line-height:1.6;
+    }
+
+    .resource-link {
+      display:inline-block;
+      margin-top:.8rem;
+      font-size:.75rem;
+      color:var(--accent);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    @media(max-width:960px){
+      .hero-inner{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav-inner">
+    <strong>GYYANX</strong>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Solutions</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section id="home">
+  <div class="container hero-inner">
+    <div>
+      <div class="hero-kicker">Enterprise AI • GenAI • RL-GNN</div>
+      <h1 class="hero-title">
+        Transforming <span>enterprises</span><br/>into intelligent organizations
+      </h1>
+
+      <p class="hero-text">
+        gyyanX partners with enterprises and tech startups to design, build and scale
+        production-grade AI systems—combining Generative AI, machine learning and hybrid
+        RL-GNN architectures to deliver measurable business impact.
+      </p>
+
+      <div class="featured-insight">
+        <span>Featured Research</span>
+        <a href="/articles/intelligent-work-fabric-executive-summary.html">
+          Intelligent Work Fabric™ — Designing AI-Native Enterprises →
+        </a>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn-primary"
+           href="/articles/intelligent-work-fabric-executive-summary.html">
+          Read Framework
+        </a>
+        <a class="btn-secondary" href="#resources">
+          Explore Resources
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resources">
+  <div class="container">
+    <h2>Resources</h2>
+
+    <div class="resource-card">
+      <h3>Intelligent Work Fabric™</h3>
+      <p>
+        A definitive operating-model framework for designing AI-native enterprises with
+        scalable human–AI collaboration and embedded governance.
+      </p>
+      <a class="resource-link" href="/articles/intelligent-work-fabric.html">
+        Explore the Framework →
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="padding:2rem;text-align:center;color:var(--text-tertiary);">
+  © <span id="year"></span> gyyanX
+</footer>
+
+<script>
+  document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+
+</body>
+</html>
         "Segoe UI", sans-serif;
       background: radial-gradient(circle at 0 0, #161b33 0, #05060a 45%, #000 100%);
       color: var(--text-primary);
@@ -1365,8 +1590,7 @@
               enabling scalable human–AI collaboration with embedded governance.
             </p>
           
-            <a href="/articles/intelligent-work-fabric.html" class="resource-link">
-              Explore the Framework →
+            
             </a>
           </div>
 
