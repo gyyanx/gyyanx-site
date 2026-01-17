@@ -715,6 +715,19 @@
       font-size: 0.78rem;
       color: var(--accent);
     }
+    .resource-subsection {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(79, 157, 255, 0.15);
+    }
+
+    .resource-subsection-title {
+      font-family: "Exo 2", system-ui, sans-serif;
+      font-size: 1.4rem;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
 
     /* CONTACT */
     #contact {
@@ -1266,6 +1279,7 @@
       </section>
 
       <!-- RESOURCES / INSIGHTS -->
+      <!-- RESOURCES / INSIGHTS -->
       <section id="resources">
         <div class="container">
           <div class="section-header">
@@ -1277,6 +1291,7 @@
             </p>
           </div>
 
+          <!-- Featured Resources -->
           <div class="resource-list">
             <article class="resource-item">
               <div class="resource-label">Technical Brief</div>
@@ -1285,7 +1300,7 @@
                 A deep dive into how reinforcement learning and graph neural networks combine to
                 optimize query planning in complex databases.
               </p>
-              <a href="#" class="resource-link">Request brief &rarr;</a>
+              <a href="articles/rl-gnn-query-optimization.html" class="resource-link">Read article &rarr;</a>
             </article>
 
             <article class="resource-item">
@@ -1308,6 +1323,42 @@
               <a href="#" class="resource-link">View upcoming sessions &rarr;</a>
             </article>
           </div>
+
+          <!-- Articles Subsection -->
+          <div class="resource-subsection">
+            <h3 class="resource-subsection-title">Articles</h3>
+            
+            <div class="resource-list">
+              <article class="resource-item">
+                <div class="resource-label">Article</div>
+                <h4>The Convergence of Digital Twins and Agentic AI</h4>
+                <p>
+                  Strategic guidance for manufacturing leaders on architecting zero-downtime operations through autonomous, self-healing production systems.
+                </p>
+                <a href="articles/digital-twins-agentic-ai.html" class="resource-link">Read article &rarr;</a>
+              </article>
+
+              <article class="resource-item">
+                <div class="resource-label">Article</div>
+                <h4>Intelligent Work Fabric Executive Summary</h4>
+                <p>
+                  Exploring the future of work through AI-powered collaboration and intelligent automation frameworks.
+                </p>
+                <a href="articles/intelligent-work-fabric-executive-summary.html" class="resource-link">Read article &rarr;</a>
+              </article>
+
+              <!-- Placeholder for future articles -->
+              <article class="resource-item" style="opacity: 0.6; border-style: dashed;">
+                <div class="resource-label">Coming Soon</div>
+                <h4>More Insights Coming</h4>
+                <p>
+                  Stay tuned for more in-depth articles on AI strategy, implementation best practices, and emerging technologies.
+                </p>
+                <a href="#contact" class="resource-link">Subscribe for updates &rarr;</a>
+              </article>
+            </div>
+          </div>
+
         </div>
       </section>
 
