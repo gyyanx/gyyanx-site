@@ -982,21 +982,211 @@
           </div>
 
           <div class="hero-visual" aria-hidden="true">
-            <div class="hero-orbit">
-              <div class="hero-node"></div>
-              <div class="hero-node"></div>
-              <div class="hero-node"></div>
-              <div class="hero-node"></div>
-              <div class="hero-core">
-                <span>GyyanX AI CORE</span>
-              </div>
-            </div>
-            <div class="hero-orbit-label">
-              Self-optimizing AI stack for decision intelligence, query optimization and
-              real-time analytics.
-            </div>
-          </div>
-        </div>
+  <svg width="300" height="380" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%;">
+    <defs>
+      <radialGradient id="coreGrad" cx="50%" cy="30%">
+        <stop offset="0%" style="stop-color:#00c8ff;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#7b2eff;stop-opacity:1" />
+      </radialGradient>
+      
+      <radialGradient id="glowGrad" cx="50%" cy="50%">
+        <stop offset="0%" style="stop-color:#00c8ff;stop-opacity:0.5" />
+        <stop offset="100%" style="stop-color:#00c8ff;stop-opacity:0" />
+      </radialGradient>
+
+      <radialGradient id="node1Grad" cx="30%" cy="30%">
+        <stop offset="0%" style="stop-color:#00c8ff" />
+        <stop offset="100%" style="stop-color:#0891b2" />
+      </radialGradient>
+
+      <radialGradient id="node2Grad" cx="30%" cy="30%">
+        <stop offset="0%" style="stop-color:#4f9dff" />
+        <stop offset="100%" style="stop-color:#2563eb" />
+      </radialGradient>
+
+      <radialGradient id="node3Grad" cx="30%" cy="30%">
+        <stop offset="0%" style="stop-color:#7b2eff" />
+        <stop offset="100%" style="stop-color:#5b21b6" />
+      </radialGradient>
+
+      <filter id="nodeGlow">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <filter id="coreGlow">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- Background glow -->
+    <circle cx="150" cy="150" r="120" fill="url(#glowGrad)" opacity="0.3"/>
+
+    <!-- Outer orbit ring -->
+    <circle cx="150" cy="150" r="130" fill="none" stroke="rgba(0, 200, 255, 0.35)" 
+            stroke-width="1" filter="url(#coreGlow)"/>
+    
+    <!-- Middle orbit (dashed) -->
+    <circle cx="150" cy="150" r="100" fill="none" stroke="rgba(123, 46, 255, 0.45)" 
+            stroke-width="1" stroke-dasharray="6,4"/>
+    
+    <!-- Inner orbit (dashed) -->
+    <circle cx="150" cy="150" r="75" fill="none" stroke="rgba(79, 157, 255, 0.4)" 
+            stroke-width="1" stroke-dasharray="4,3"/>
+
+    <!-- Connection lines -->
+    <line x1="65" y1="75" x2="150" y2="150" stroke="rgba(0, 200, 255, 0.2)" stroke-width="0.5"/>
+    <line x1="235" y1="70" x2="150" y2="150" stroke="rgba(79, 157, 255, 0.2)" stroke-width="0.5"/>
+    <line x1="55" y1="220" x2="150" y2="150" stroke="rgba(123, 46, 255, 0.2)" stroke-width="0.5"/>
+    <line x1="245" y1="225" x2="150" y2="150" stroke="rgba(0, 200, 255, 0.2)" stroke-width="0.5"/>
+
+    <!-- Orbital Node 1: Agentic AI (Top Left) -->
+    <g id="node1">
+      <circle cx="65" cy="75" r="30" fill="url(#node1Grad)" opacity="0.95" filter="url(#nodeGlow)"/>
+      <circle cx="65" cy="75" r="26" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+      
+      <!-- Brain icon -->
+      <path d="M 65 68 Q 62 66 59 68 Q 58 70 59 72 Q 61 74 63 72 Q 64 74 65 76 Q 66 74 67 72 Q 69 74 71 72 Q 72 70 71 68 Q 68 66 65 68 M 62 71 L 62 75 M 68 71 L 68 75" 
+            stroke="#020814" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      
+      <text x="65" y="88" font-family="Inter, Arial" font-size="7" 
+            font-weight="600" fill="#020814" text-anchor="middle">Agentic AI</text>
+      <text x="65" y="96" font-family="Inter, Arial" font-size="6" 
+            font-weight="400" fill="#020814" text-anchor="middle" opacity="0.8">Agents</text>
+    </g>
+
+    <!-- Orbital Node 2: Predictive Maintenance (Top Right) -->
+    <g id="node2">
+      <circle cx="235" cy="70" r="30" fill="url(#node2Grad)" opacity="0.95" filter="url(#nodeGlow)"/>
+      <circle cx="235" cy="70" r="26" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+      
+      <!-- Gear/Maintenance icon -->
+      <circle cx="235" cy="70" r="6" stroke="#020814" stroke-width="1.2" fill="none"/>
+      <path d="M 235 62 L 235 64 M 235 76 L 235 78 M 227 70 L 229 70 M 241 70 L 243 70 M 229 64 L 230 65 M 240 75 L 241 76 M 229 76 L 230 75 M 240 65 L 241 64" 
+            stroke="#020814" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <path d="M 233 68 L 237 72" stroke="#020814" stroke-width="1.2" stroke-linecap="round"/>
+      
+      <text x="235" y="86" font-family="Inter, Arial" font-size="7" 
+            font-weight="600" fill="#020814" text-anchor="middle">Predictive</text>
+      <text x="235" y="93" font-family="Inter, Arial" font-size="6" 
+            font-weight="400" fill="#020814" text-anchor="middle" opacity="0.8">Maintenance</text>
+    </g>
+
+    <!-- Orbital Node 3: Optimization (Bottom Left) -->
+    <g id="node3">
+      <circle cx="55" cy="220" r="30" fill="url(#node3Grad)" opacity="0.95" filter="url(#nodeGlow)"/>
+      <circle cx="55" cy="220" r="26" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+      
+      <!-- Network icon -->
+      <circle cx="50" cy="215" r="1.5" fill="#e8ecf7"/>
+      <circle cx="60" cy="215" r="1.5" fill="#e8ecf7"/>
+      <circle cx="50" cy="225" r="1.5" fill="#e8ecf7"/>
+      <circle cx="60" cy="225" r="1.5" fill="#e8ecf7"/>
+      <circle cx="55" cy="220" r="1.5" fill="#e8ecf7"/>
+      <line x1="50" y1="215" x2="55" y2="220" stroke="#e8ecf7" stroke-width="1"/>
+      <line x1="60" y1="215" x2="55" y2="220" stroke="#e8ecf7" stroke-width="1"/>
+      <line x1="50" y1="225" x2="55" y2="220" stroke="#e8ecf7" stroke-width="1"/>
+      <line x1="60" y1="225" x2="55" y2="220" stroke="#e8ecf7" stroke-width="1"/>
+      
+      <text x="55" y="235" font-family="Inter, Arial" font-size="7" 
+            font-weight="600" fill="#e8ecf7" text-anchor="middle">Optimization</text>
+      <text x="55" y="242" font-family="Inter, Arial" font-size="6" 
+            font-weight="400" fill="#a8b3ca" text-anchor="middle">RL-GNN</text>
+    </g>
+
+    <!-- Orbital Node 4: Governance (Bottom Right) -->
+    <g id="node4">
+      <circle cx="245" cy="225" r="30" fill="url(#node1Grad)" opacity="0.95" filter="url(#nodeGlow)"/>
+      <circle cx="245" cy="225" r="26" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+      
+      <!-- Shield icon -->
+      <path d="M 245 217 L 239 220 L 239 226 Q 239 230 245 232 Q 251 230 251 226 L 251 220 Z" 
+            stroke="#e8ecf7" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+      <path d="M 242 224 L 244 227 L 248 221" stroke="#e8ecf7" stroke-width="1.2" 
+            fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <text x="245" y="240" font-family="Inter, Arial" font-size="7" 
+            font-weight="600" fill="#e8ecf7" text-anchor="middle">Governance</text>
+      <text x="245" y="247" font-family="Inter, Arial" font-size="6" 
+            font-weight="400" fill="#a8b3ca" text-anchor="middle">MLOps</text>
+    </g>
+
+    <!-- Central core -->
+    <circle cx="150" cy="150" r="50" fill="url(#coreGrad)" opacity="0.95" filter="url(#coreGlow)"/>
+    <circle cx="150" cy="150" r="43" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="34" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+
+    <!-- Core text -->
+    <text x="150" y="146" font-family="Exo 2, Arial" font-size="14" 
+          font-weight="700" fill="#020814" text-anchor="middle" letter-spacing="1.5">GYYANX</text>
+    <text x="150" y="159" font-family="Exo 2, Arial" font-size="12" 
+          font-weight="600" fill="#020814" text-anchor="middle" letter-spacing="2">AI CORE</text>
+
+    <!-- Description text -->
+    <text x="150" y="315" font-family="Inter, Arial" font-size="11" 
+          fill="#a8b3ca" text-anchor="middle">Self-optimizing AI stack for decision</text>
+    <text x="150" y="330" font-family="Inter, Arial" font-size="11" 
+          fill="#a8b3ca" text-anchor="middle">intelligence, query optimization and</text>
+    <text x="150" y="345" font-family="Inter, Arial" font-size="11" 
+          fill="#a8b3ca" text-anchor="middle">real-time analytics.</text>
+
+    <!-- Pulse animation -->
+    <circle cx="150" cy="150" r="50" fill="none" stroke="rgba(0, 200, 255, 0.4)" stroke-width="1">
+      <animate attributeName="r" values="50;55;50" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.1;0.4" dur="3s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Slow rotation animation for nodes -->
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 150 150"
+      to="360 150 150"
+      dur="60s"
+      repeatCount="indefinite"
+      additive="sum"
+      href="#node1"/>
+    
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 150 150"
+      to="360 150 150"
+      dur="60s"
+      repeatCount="indefinite"
+      additive="sum"
+      href="#node2"/>
+    
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 150 150"
+      to="360 150 150"
+      dur="60s"
+      repeatCount="indefinite"
+      additive="sum"
+      href="#node3"/>
+    
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 150 150"
+      to="360 150 150"
+      dur="60s"
+      repeatCount="indefinite"
+      additive="sum"
+      href="#node4"/>
+
+  </svg>
+</div>
+
       </section>
 
       <!-- ABOUT -->
