@@ -200,21 +200,83 @@
    ======================================== */
 
 @media (max-width: 960px) {
-  /* ... keep all your existing mobile styles ... */
-  
-  /* ADD THESE for mobile branding: */
-  {
-  .nav-inner {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+  .hero-inner,
+  #about .about-grid,
+  .training-layout,
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr);
   }
-}
+
+  .hero-inner {
+    gap: 2.5rem;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .grid-3,
+  .grid-3-2,
+  .industry-grid,
+  .resource-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .training-levels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* === FIX NAVBAR HEIGHT === */
+  header {
+    height: auto;
+    min-height: 85px;  /* Increased to accommodate larger logo */
+  }
+
+  .nav-inner {
+    height: auto;
+    min-height: 85px;
+    padding: 1rem 1.5rem;  /* Add vertical padding */
+    align-items: center;
+  }
+  /* === END NAVBAR FIX === */
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  nav {
+    position: fixed;
+    inset: auto 0 auto 0;  /* Changed from var(--nav-height) */
+    top: 85px;  /* Match the new navbar height */
+    background: rgba(5, 7, 14, 0.98);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(79, 157, 255, 0.3);
+    transform: translateY(-120%);
+    transition: transform 0.25s ease-out;
+  }
+
+  nav.open {
+    transform: translateY(0);
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem 1.5rem;
+    gap: 0.9rem;
+  }
+
+  .nav-cta {
+    margin-top: 0.3rem;
+  }
+
+  /* === MOBILE BRANDING === */
   .brand {
     gap: 0.7rem;
   }
   
   .brand-icon {
-    width: 48px;            /* large enough to be visible on mobile */
+    width: 48px;
     height: 48px;
     box-shadow: 0 0 24px rgba(0, 200, 255, 0.4);
   }
@@ -234,7 +296,7 @@
   }
 
   .brand-name {
-    font-size: 1.3rem;      /* prominently large on mobile */
+    font-size: 1.3rem;
     font-weight: 800;
   }
 
@@ -257,16 +319,45 @@
   .brand:active .brand-tagline {
     color: #ffffff;
   }
+  /* === END MOBILE BRANDING === */
 }
 
 @media (max-width: 640px) {
-  /* ... keep your existing styles ... */
-  
-  /* ADD THESE for small phones: */
-  
+  #home {
+    padding-top: 4rem;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  section {
+    padding: 3.2rem 1.2rem;
+  }
+
+  /* Adjust navbar for very small screens */
+  header {
+    min-height: 80px;
+  }
+
+  .nav-inner {
+    min-height: 80px;
+    padding: 0.8rem 1.2rem;
+  }
+
   .brand-icon {
     width: 44px;
     height: 44px;
+  }
+
+  .brand-icon::before {
+    width: 20px;
+    height: 20px;
+  }
+
+  .brand-icon::after {
+    width: 12px;
+    height: 12px;
   }
 
   .brand-name {
@@ -276,50 +367,13 @@
   .brand-tagline {
     font-size: 0.8rem;
   }
+
+  /* Update mobile nav position */
+  nav {
+    top: 80px;
+  }
 }
 
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    nav a {
-      font-size: 0.86rem;
-      color: var(--text-secondary);
-      position: relative;
-      padding-bottom: 4px;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transition: width 0.22s ease-out;
-      border-radius: 999px;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      padding: 0.6rem 1rem;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      font-size: 0.82rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      box-shadow: var(--shadow-soft);
-      white-space: nowrap;
-    }
 
     /* Hamburger – mobile only initially hidden */
     .nav-toggle {
