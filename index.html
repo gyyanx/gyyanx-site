@@ -105,14 +105,24 @@
       padding: 0 1.5rem;
     }
 
-   .brand-icon {
-  width: 40px;              /* increased size (or keep 32px if you prefer) */
-  height: 40px;
+   /* ========================================
+   BRAND LOGO - MUCH LARGER & MORE PROMINENT
+   ======================================== */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;              /* increased from 0.65rem */
+}
+
+.brand-icon {
+  width: 52px;              /* INCREASED from 32px - 62% larger! */
+  height: 52px;
   border-radius: 999px;
   background: radial-gradient(circle at 30% 0, var(--primary), var(--secondary));
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 0 28px rgba(0, 200, 255, 0.4);  /* STRONGER glow */
   position: relative;
-  transition: all 0.3s ease;  /* ← ENABLES SMOOTH ANIMATION */
+  transition: all 0.3s ease;
 }
 
 .brand-icon::before,
@@ -120,55 +130,150 @@
   content: "";
   position: absolute;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);  /* THICKER border */
 }
 
 .brand-icon::before {
-  width: 18px;
-  height: 18px;
-  top: 5px;
-  left: 5px;
+  width: 24px;              /* INCREASED from 14px */
+  height: 24px;
+  top: 7px;
+  left: 7px;
 }
 
 .brand-icon::after {
-  width: 10px;
-  height: 10px;
-  bottom: 5px;
-  right: 5px;
+  width: 14px;              /* INCREASED from 8px */
+  height: 14px;
+  bottom: 7px;
+  right: 7px;
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
+  line-height: 1.15;        /* slightly more space */
 }
 
 .brand-name {
   font-family: "Exo 2", system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-weight: 800;         /* BOLDER - was 600, now 800 */
+  letter-spacing: 0.2em;    /* MORE spacing - was 0.14em */
   text-transform: uppercase;
-  font-size: 1.1rem;        /* increased size */
-  transition: color 0.3s ease;  /* ← ENABLES COLOR TRANSITION */
+  font-size: 1.4rem;        /* MUCH LARGER - was 0.9rem, now 1.4rem */
+  color: var(--text-primary);
+  text-shadow: 0 0 20px rgba(0, 200, 255, 0.2);  /* subtle glow */
+  transition: all 0.3s ease;
 }
 
 .brand-tagline {
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
+  font-size: 0.9rem;        /* LARGER - was 0.7rem, now 0.9rem */
+  color: var(--primary);    /* CHANGED to CYAN - was tertiary gray */
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;   /* MORE spacing - was 0.12em */
+  font-weight: 600;         /* ADDED weight - was normal */
+  margin-top: 2px;
+  transition: all 0.3s ease;
 }
 
-/* ===== HOVER EFFECTS - ADD THESE NEW RULES ===== */
+
+/* ========================================
+   HOVER EFFECTS - ENHANCED
+   ======================================== */
+
 .brand:hover .brand-icon {
-  transform: scale(1.1);
-  box-shadow: 0 0 32px rgba(0, 200, 255, 0.5);
+  transform: scale(1.08);
+  box-shadow: 0 0 40px rgba(0, 200, 255, 0.6);
 }
 
 .brand:hover .brand-name {
   color: var(--primary);
+  text-shadow: 0 0 25px rgba(0, 200, 255, 0.4);
 }
-/* ===== END HOVER EFFECTS ===== */
+
+.brand:hover .brand-tagline {
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(0, 200, 255, 0.3);
+}
+
+
+/* ========================================
+   MOBILE OPTIMIZATION
+   ======================================== */
+
+@media (max-width: 960px) {
+  /* ... keep all your existing mobile styles ... */
+  
+  /* ADD THESE for mobile branding: */
+  
+  .brand {
+    gap: 0.7rem;
+  }
+  
+  .brand-icon {
+    width: 48px;            /* large enough to be visible on mobile */
+    height: 48px;
+    box-shadow: 0 0 24px rgba(0, 200, 255, 0.4);
+  }
+
+  .brand-icon::before {
+    width: 22px;
+    height: 22px;
+    top: 6px;
+    left: 6px;
+  }
+
+  .brand-icon::after {
+    width: 13px;
+    height: 13px;
+    bottom: 6px;
+    right: 6px;
+  }
+
+  .brand-name {
+    font-size: 1.3rem;      /* prominently large on mobile */
+    font-weight: 800;
+  }
+
+  .brand-tagline {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  /* Touch effect for mobile */
+  .brand:active .brand-icon {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(0, 200, 255, 0.6);
+  }
+
+  .brand:active .brand-name {
+    color: var(--primary);
+  }
+
+  .brand:active .brand-tagline {
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 640px) {
+  /* ... keep your existing styles ... */
+  
+  /* ADD THESE for small phones: */
+  
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .brand-name {
+    font-size: 1.2rem;
+  }
+
+  .brand-tagline {
+    font-size: 0.8rem;
+  }
+}
+
+
     nav ul {
       list-style: none;
       display: flex;
